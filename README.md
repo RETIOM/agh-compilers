@@ -14,3 +14,9 @@ Python 3.14
 | DIVIDE | Operator dzielenia (`/`) | `/` |
 | LPAREN | Lewy nawias `(` | `(` |
 | RPAREN | Prawy nawias `)` | `)` |
+
+## Użytkowanie
+```
+python main.py -g SimpleMath {tekst}
+python main.py -g SimpleMath "test123 + 45 / 10"
+```
