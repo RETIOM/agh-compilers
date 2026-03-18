@@ -17,7 +17,7 @@ class Scanner[S, ET]:
     def _reset(self) -> None:
         self.state = self.grammar.start_state
 
-    def _classify_char(self, char: str, pos: int):
+    def _classify_char(self, char: str):
         return self.grammar.categorize(char)
 
     def _emit_token(self, tokens: list[Token[ET]], value: str, pos: int) -> None:
@@ -56,27 +56,15 @@ class Scanner[S, ET]:
             j = i
 
             while j < len(text):
-                boundary_category = self._classify_char(text[j], j)
-                if boundary_category is None:
-                    raise SyntaxError(f"Illegal token: {text[j]} at position: {j + 1}")
-                if not self.grammar.should_skip(self.state, boundary_category):
-                    break
-                j += 1
-
-            if j >= len(text):
-                break
-
-            i = j
-
-            while j < len(text):
                 char = text[j]
-                category = self._classify_char(char, j)
+                category = self._classify_char(char)
 
                 if category is None:
                     break
 
                 if self.grammar.should_skip(self.state, category):
                     j += 1
+                    i = j
                     continue
 
                 advanced, cur_value = self._advance(char, category, cur_value)
@@ -90,6 +78,9 @@ class Scanner[S, ET]:
                     last_accept_value = cur_value
                     last_accept_pos = j
 
+            if j >= len(text) and last_accept_state is None:
+                break
+
             if last_accept_state is None:
                 offending = text[j] if j < len(text) else "<eof>"
                 position = j + 1 if j < len(text) else j
@@ -98,7 +89,5 @@ class Scanner[S, ET]:
             self.state = last_accept_state
             self._emit_token(tokens, last_accept_value, last_accept_pos - 1)
             i = last_accept_pos
-
-        self._finalize(tokens, "", len(text))
 
         return tokens
