@@ -29,6 +29,8 @@ def build_grammar(grammar_type: str) -> Grammar | None:
 def main():
     args = parse_args()
     grammar = build_grammar(args.grammar)
+    if grammar is None:
+        raise ValueError(f"Grammar can't be None!") 
     scanner = Scanner(grammar)
 
     out = scanner.scan(args.text)
