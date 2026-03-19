@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Any
 
-from src.grammar import Grammar
+from src.language import Grammar
 from src.tokens import Token
 
 
@@ -47,6 +47,7 @@ class Scanner[S, ET]:
         tokens: list[Token[ET]] = []
         i = 0
 
+        # Used for keeping track of last_accept values(i - beginning of current token)
         while i < len(text):
             self._reset()
             cur_value = ""
@@ -55,6 +56,7 @@ class Scanner[S, ET]:
             last_accept_pos = i
             j = i
 
+            # Actual consumption loop(j - end of token)
             while j < len(text):
                 char = text[j]
                 category = self._classify_char(char)

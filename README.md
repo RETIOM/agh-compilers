@@ -17,6 +17,16 @@ Python 3.14
 
 ## Użytkowanie
 ```
-python main.py -g SimpleMath {tekst}
+usage: python main.py [-h] [-g {SimpleMath}] text
+
+A simple scanner
+
+positional arguments:
+  text                  Scanner input
+
+options:
+  -h, --help            show this help message and exit
+  -g, --grammar {SimpleMath}
+
 python main.py -g SimpleMath "test123 + 45 / 10"
 ```

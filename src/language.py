@@ -1,6 +1,12 @@
 from abc import ABC, abstractmethod
 
 
+# LexarGrammar + SyntaxGrammar + ColorScheme + etc
+class Language:
+    grammar: Grammar
+    color_scheme: ColorScheme
+
+
 class Grammar[S, C, ET](ABC):
     @property
     @abstractmethod
@@ -20,3 +26,11 @@ class Grammar[S, C, ET](ABC):
 
     @abstractmethod
     def get_token_type(self, state: S) -> ET | None: ...
+
+
+class ColorScheme[ET](ABC):
+    color_map: dict[ET, str] | None = None
+
+    @abstractmethod
+    def get_color(self, token: ET) -> str:
+        pass

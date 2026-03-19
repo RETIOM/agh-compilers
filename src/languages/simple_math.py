@@ -1,6 +1,7 @@
 from enum import Enum
+from dataclasses import dataclass
 
-from src.grammar import Grammar
+from src.language import Grammar, ColorScheme
 
 
 class SimpleMathToken(Enum):
@@ -38,6 +39,13 @@ class SimpleMathState(Enum):
     RPAREN = 8
 
 
+@dataclass(slots=True, frozen=True, init=False)
+class SimpleMathColorScheme(ColorScheme):
+    def get_color(self, token: SimpleMathToken) -> str:
+        return "#000000"
+
+
+@dataclass(slots=True, frozen=True, init=False)
 class SimpleMathGrammar(Grammar):
     @property
     def start_state(self) -> SimpleMathState:

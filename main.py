@@ -1,6 +1,6 @@
 import argparse
-from src.grammar import Grammar
-from src.grammars.simple_math import SimpleMathGrammar
+from src.language import Grammar
+from src.languages.simple_math import SimpleMathGrammar
 from src.scanner import Scanner
 
 
@@ -30,7 +30,7 @@ def main():
     args = parse_args()
     grammar = build_grammar(args.grammar)
     if grammar is None:
-        raise ValueError(f"Grammar can't be None!") 
+        raise ValueError("Grammar can't be None!")
     scanner = Scanner(grammar)
 
     out = scanner.scan(args.text)
