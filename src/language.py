@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
 
 # LexarGrammar + SyntaxGrammar + ColorScheme + etc
+@dataclass(slots=True, frozen=True)
 class Language:
     grammar: Grammar
     color_scheme: ColorScheme
