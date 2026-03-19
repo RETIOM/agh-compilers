@@ -1,6 +1,7 @@
 import argparse
 
 from src.colorizer import Colorizer
+from src.consts import HTML_BODY
 from src.language import Language
 from src.languages.simple_math import SimpleMathColorScheme, SimpleMathGrammar
 from src.scanner import Scanner
@@ -44,7 +45,9 @@ def main():
     html = colorizer.colorize(out)
 
     with open("index.html", "w") as f:
-        f.write(html)
+        f.write(
+            HTML_BODY.format(title=language.color_scheme.__class__.__name__, body=html)
+        )
 
     for token in out:
         print(token)
