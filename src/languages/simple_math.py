@@ -1,7 +1,7 @@
-from enum import Enum
 from dataclasses import dataclass
+from enum import Enum
 
-from src.language import Grammar, ColorScheme
+from src.language import ColorScheme, Grammar
 
 
 class SimpleMathToken(Enum):
@@ -39,10 +39,32 @@ class SimpleMathState(Enum):
     RPAREN = 8
 
 
+# @dataclass(slots=True, frozen=True, init=False)
+# class SimpleMathColorScheme(ColorScheme):
+#     def get_color(self, token: SimpleMathToken) -> str:
+#         return "#000000"
+
+
 @dataclass(slots=True, frozen=True, init=False)
 class SimpleMathColorScheme(ColorScheme):
     def get_color(self, token: SimpleMathToken) -> str:
-        return "#000000"
+        match token:
+            case SimpleMathToken.IDENTIFIER:
+                return "#1f77b4"  # blue
+            case SimpleMathToken.NUMBER:
+                return "#d62728"  # red
+            case SimpleMathToken.PLUS:
+                return "#2ca02c"  # green
+            case SimpleMathToken.MINUS:
+                return "#2ca02c"  # green
+            case SimpleMathToken.MULTIPLY:
+                return "#9467bd"  # purple
+            case SimpleMathToken.DIVIDE:
+                return "#9467bd"  # purple
+            case SimpleMathToken.LPAREN:
+                return "#ff7f0e"  # orange
+            case SimpleMathToken.RPAREN:
+                return "#ff7f0e"  # orange
 
 
 @dataclass(slots=True, frozen=True, init=False)
