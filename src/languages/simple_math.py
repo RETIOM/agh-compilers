@@ -5,6 +5,7 @@ from src.language import ColorScheme, Grammar
 
 
 class SimpleMathToken(Enum):
+    INVALID = -1
     IDENTIFIER = 1  # [a-zA-Z][a-zA-Z0-9]*
     NUMBER = 2  # [0-9]+
     PLUS = 3  # \+
@@ -16,6 +17,7 @@ class SimpleMathToken(Enum):
 
 
 class SimpleMathCategory(Enum):
+    INVALID = -1
     ALPHA = 1
     DIGIT = 2
     PLUS = 3
@@ -28,6 +30,7 @@ class SimpleMathCategory(Enum):
 
 
 class SimpleMathState(Enum):
+    INVALID = -1
     START = 0
     IDENTIFIER = 1
     NUMBER = 2
@@ -37,12 +40,6 @@ class SimpleMathState(Enum):
     DIVIDE = 6
     LPAREN = 7
     RPAREN = 8
-
-
-# @dataclass(slots=True, frozen=True, init=False)
-# class SimpleMathColorScheme(ColorScheme):
-#     def get_color(self, token: SimpleMathToken) -> str:
-#         return "#000000"
 
 
 @dataclass(slots=True, frozen=True, init=False)
@@ -65,6 +62,8 @@ class SimpleMathColorScheme(ColorScheme):
                 return "color:#ff7f0e;"  # orange
             case SimpleMathToken.RPAREN:
                 return "color:#ff7f0e;"  # orange
+            case SimpleMathToken.INVALID:
+                return "text-decoration: underline wavy red;"
 
 
 @dataclass(slots=True, frozen=True, init=False)
@@ -91,6 +90,8 @@ class SimpleMathGrammar(Grammar):
                 return SimpleMathToken.LPAREN
             case SimpleMathState.RPAREN:
                 return SimpleMathToken.RPAREN
+            case SimpleMathState.INVALID:
+                return SimpleMathToken.INVALID
             case _:
                 return None
 
@@ -114,7 +115,7 @@ class SimpleMathGrammar(Grammar):
         elif char == ")":
             return SimpleMathCategory.RPAREN
         else:
-            return None
+            return SimpleMathCategory.INVALID
 
     def transition(
         self, state: SimpleMathState, category: SimpleMathCategory
@@ -138,6 +139,8 @@ class SimpleMathGrammar(Grammar):
                         return SimpleMathState.LPAREN
                     case SimpleMathCategory.RPAREN:
                         return SimpleMathState.RPAREN
+                    case SimpleMathCategory.INVALID:
+                        return SimpleMathState.INVALID
                     case _:
                         return None
             case SimpleMathState.IDENTIFIER:
