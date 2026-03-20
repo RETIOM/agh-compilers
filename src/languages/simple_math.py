@@ -50,21 +50,21 @@ class SimpleMathColorScheme(ColorScheme):
     def get_color(self, token: SimpleMathToken) -> str:
         match token:
             case SimpleMathToken.IDENTIFIER:
-                return "#1f77b4"  # blue
+                return "color:#1f77b4;"  # blue
             case SimpleMathToken.NUMBER:
-                return "#d62728"  # red
+                return "color:#d62728;"  # red
             case SimpleMathToken.PLUS:
-                return "#2ca02c"  # green
+                return "color:#2ca02c;"  # green
             case SimpleMathToken.MINUS:
-                return "#2ca02c"  # green
+                return "color:#2ca02c;"  # green
             case SimpleMathToken.MULTIPLY:
-                return "#9467bd"  # purple
+                return "color:#9467bd;"  # purple
             case SimpleMathToken.DIVIDE:
-                return "#9467bd"  # purple
+                return "color:#9467bd;"  # purple
             case SimpleMathToken.LPAREN:
-                return "#ff7f0e"  # orange
+                return "color:#ff7f0e;"  # orange
             case SimpleMathToken.RPAREN:
-                return "#ff7f0e"  # orange
+                return "color:#ff7f0e;"  # orange
 
 
 @dataclass(slots=True, frozen=True, init=False)

@@ -1,4 +1,4 @@
-SPAN = '<span style="color: {color};">{token}</span>'
+SPAN = '<span style="{style}">{token}</span>'
 
 HTML_BODY = """<!DOCTYPE html>
 <html>

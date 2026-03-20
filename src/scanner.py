@@ -74,7 +74,6 @@ class Scanner[S, ET]:
                     break
 
                 j += 1
-
                 if self.grammar.get_token_type(self.state) is not None:
                     last_accept_state = self.state
                     last_accept_value = cur_value

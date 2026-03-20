@@ -11,7 +11,7 @@ class Colorizer[ET]:
     color_scheme: ColorScheme
 
     def _color_token(self, token_value: str, color: str):
-        return SPAN.format(color=color, token=html.escape(token_value))
+        return SPAN.format(style=color, token=html.escape(token_value))
 
     def colorize(self, tokens: list[Token[ET]]) -> str:
         output = ""
