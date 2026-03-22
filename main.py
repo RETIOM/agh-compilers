@@ -1,4 +1,6 @@
 import argparse
+import sys
+from pathlib import Path
 
 from src.colorizer import Colorizer
 from src.consts import HTML_BODY
@@ -9,7 +11,11 @@ from src.scanner import Scanner
 
 def parse_args():
     parser = argparse.ArgumentParser(description="A simple scanner")
-    parser.add_argument("text", type=str, help="Scanner input")
+    group_input = parser.add_mutually_exclusive_group(required=True)
+    group_input.add_argument("text", type=str, nargs="?", help="Scanner input")
+    group_input.add_argument(
+        "-f", "--file", type=Path, help="Path to the file with input"
+    )
     parser.add_argument(
         "-g",
         "--grammar",
@@ -41,7 +47,16 @@ def main():
     scanner = Scanner(language.grammar)
     colorizer = Colorizer(language.color_scheme)
 
-    out = scanner.scan(args.text)
+    if args.file is not None:
+        try:
+            with open(args.file, "r", encoding="utf-8") as f:
+                scanner_input = f.read()
+        except FileNotFoundError:
+            print(f"File not found: '{args.file}'")
+            sys.exit(1)
+    else:
+        scanner_input = args.text
+    out = scanner.scan(scanner_input)
     html = colorizer.colorize(out)
 
     with open("index.html", "w") as f:
