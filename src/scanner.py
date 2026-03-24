@@ -21,7 +21,7 @@ class Scanner[S, ET]:
         return self.grammar.categorize(char)
 
     def _emit_token(self, tokens: list[Token[ET]], value: str, pos: int) -> None:
-        token_type = self.grammar.get_token_type(self.state)
+        token_type = self.grammar.resolve_token_type(self.state, value)
         if token_type is None:
             raise SyntaxError(f"Invalid token: '{value}' at position: {pos + 1}")
         tokens.append(Token(token_type, value))
