@@ -131,7 +131,7 @@ class SimpleProgrammingState(Enum):
     COMMENT_MULTI_CLOSED = 1004
 
 
-KEYWORDS = {
+KEYWORDS: dict[str, SimpleProgrammingToken] = {
     "if": SimpleProgrammingToken.KEYWORD,
     "else": SimpleProgrammingToken.KEYWORD,
     "while": SimpleProgrammingToken.KEYWORD,
@@ -249,7 +249,7 @@ class SimpleProgrammingColorScheme(ColorScheme):
     def reset(self) -> None:
         self.paren_depth = 0
         self.brace_depth = 0
-        self.bracket_depth
+        self.bracket_depth = 0
 
 
 @dataclass(slots=True, frozen=True, init=False)
@@ -356,8 +356,10 @@ class SimpleProgrammingGrammar(Grammar):
     def resolve_token_type(
         self,
         state: SimpleProgrammingState,
-        value: str,
+        value: str | None = None,
     ) -> SimpleProgrammingToken | None:
+        if not value:
+            return None
         token_type = self.get_token_type(state)
         if token_type == SimpleProgrammingToken.IDENTIFIER:
             return KEYWORDS.get(value, SimpleProgrammingToken.IDENTIFIER)
