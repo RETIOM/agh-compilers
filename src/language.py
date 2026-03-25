@@ -29,6 +29,9 @@ class Grammar[S, C, ET](ABC):
     @abstractmethod
     def get_token_type(self, state: S) -> ET | None: ...
 
+    def resolve_token_type(self, state: S, val: str | None = None):
+        return self.get_token_type(state)
+
 
 class ColorScheme[ET](ABC):
     color_map: dict[ET, str] | None = None
