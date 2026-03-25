@@ -85,7 +85,6 @@ class SimpleProgrammingState(Enum):
     IDENTIFIER = 1
     NUMBER = 2
 
-    # Stany dla konkretnych operatorów
     PLUS = 3
     MINUS = 4
     STAR = 5
