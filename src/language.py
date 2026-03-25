@@ -29,7 +29,7 @@ class Grammar[S, C, ET](ABC):
     @abstractmethod
     def get_token_type(self, state: S) -> ET | None: ...
 
-    def resolve_token_type(self, state: S, val: str | None = None):
+    def resolve_token_type(self, state: S, val: str | None = None) -> ET | None:
         return self.get_token_type(state)
 
 

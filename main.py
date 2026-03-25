@@ -4,7 +4,7 @@ from pathlib import Path
 
 from src.colorizer import Colorizer
 from src.consts import HTML_BODY
-from src.language import Language
+from src.language import ColorScheme, Grammar, Language
 from src.languages.simple_math import SimpleMathColorScheme, SimpleMathGrammar
 from src.languages.simple_programming import (
     SimpleProgrammingColorScheme,
@@ -32,6 +32,8 @@ def parse_args():
 
 
 def build_language(grammar_type: str) -> Language | None:
+    grammar: Grammar
+    color_scheme: ColorScheme
     match grammar_type:
         case "SimpleMath":
             grammar = SimpleMathGrammar()

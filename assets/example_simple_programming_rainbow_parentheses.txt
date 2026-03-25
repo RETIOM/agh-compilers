@@ -1,0 +1,7 @@
+if (((alpha))) {
+    nest = (((((x)))));
+    scopes = {{{{y}}}};
+    matrix = [[[[z]]]];
+    combo = { [ ( { [ (v) ] } ) ] };
+    return;
+}

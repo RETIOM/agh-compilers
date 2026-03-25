@@ -1,0 +1,21 @@
+if (a1 == 10) {
+    count++;
+} elif (a1 != 0) {
+    count--;
+} else {
+    count += 2;
+    count -= 1;
+    count *= 3;
+    count /= 2;
+    count %= 5;
+}
+
+while (!(count < 100) && (count <= 200 || count > 3) && count >= 0) {
+    arr[0] = obj.value + 1 - 2 * 3 / 4 % 5;
+    // single line comment
+    /* multi
+       line
+       comment */
+    return;
+}
+bad_single_ampersand &
