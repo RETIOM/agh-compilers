@@ -24,7 +24,7 @@ class Scanner[S, ET]:
         token_type = self.grammar.resolve_token_type(self.state, value)
         if token_type is None:
             raise SyntaxError(f"Invalid token: '{value}' at position: {pos + 1}")
-        tokens.append(Token(token_type, value))
+        tokens.append(Token(token_type, value, attributes={"position": pos + 1}))
         self._reset()
 
     def _advance(self, char: str, category, value: str) -> tuple[bool, str]:

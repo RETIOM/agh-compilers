@@ -1,11 +1,14 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass(slots=True, frozen=True, repr=False)
 class Token[ET]:
     type: ET
     value: str
-    attributes: dict = field(default_factory=dict)
+    attributes: dict | None = None
 
     def __repr__(self):
-        return f"({self.type}, {self.value})"
+        if not self.attributes:
+            return f"({self.type}, {self.value})"
+        else:
+            return f"({self.type}, {self.value}, {self.attributes})"
