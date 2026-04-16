@@ -80,3 +80,6 @@ python main.py \
   -g SimpleProgramming \
   -f assets/example_simple_programming_rainbow_parentheses.txt
 ```
+
+## Przykłady
+![example_simple_programming_all_tokens](assets/img/example_simple_programming_all_tokens.png)
